@@ -57,3 +57,19 @@ cacheSolve(n1)
 #[2,]  0.2339231 -0.4020394 -0.5963469
 #[3,] -0.3498540 -0.8675008 -0.6323113
         
+    
+        # Now, we create a large matrix
+A<-matrix(rnorm(250000),500,500)
+system.time(solve(A))
+# user  system elapsed 
+# 0.5    0.00    0.5
+
+# if try to caching technique
+A1<-makeCacheMatrix(A)
+system.time(cacheSolve(A1))
+#   user  system elapsed 
+#   0.45    0.01    0.47 
+system.time(cacheSolve(A1))
+#getting cached data
+#   user  system elapsed        
+#      0       0       0        #That's the main purpose of caching.
